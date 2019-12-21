@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-//import apiKey from 'config.js';
+
+import apiKey from './config';
 
 //Components
 import SearchBar from './Components/SearchBar';
-import MainNav from './Components/MainNav';
+import Nav from './Components/Nav';
+import PhotoContainer from './Components/PhotoContainer';
+import NotFound from './Components/NotFound';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
+// Libs
 const axios = require('axios');
 
 // import './App.css';
@@ -19,21 +24,38 @@ class App extends Component {
     photos: [],
   };
 
+  componentDidMount() {
+    // axios.get('')
+    // .then(response => {
+    //   this.setState({
+    //     photos: response.data.???
+    //   });
+    //  })
+    // .catch(error => {
+    // console.log('Error fetching and parsing data', error);
+    // });
+  }
+
 
   render() {
     return (
-      <div className="App"> 
-        <div className="Container">
-          <SearchBar />
-          <MainNav />
-          <div className="photo-container">
-            <h2>Results</h2>
-            <ul>
-              {/* Photo list item */}
-            </ul>
+      <BrowserRouter>
+        <div className="App"> 
+          <div className="Container">
+            <SearchBar />
+            <Nav />
+            <Switch>
+              <Route path="/cats" />
+              <Route path="/dogs" />
+              <Route path="/computers" />
+              <Route component={NotFound} />
+            </Switch>
+            <PhotoContainer>
+              {/* Photos will go here*/}
+            </PhotoContainer>
           </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }

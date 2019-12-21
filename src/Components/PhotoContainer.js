@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PhotoContainer(photos) {
+function PhotoContainer(props) {
     return(
         <div className="photo-container">
             <h2>Results</h2>
