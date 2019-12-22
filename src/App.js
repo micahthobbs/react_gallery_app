@@ -9,7 +9,7 @@ import PhotoContainer from './Components/PhotoContainer';
 import NotFound from './Components/NotFound';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-// import './App.css';
+import './App.css';
 
 // Libs
 const axios = require('axios');
@@ -18,6 +18,7 @@ class App extends Component {
 
   state = {
     photos: [],
+    loading: true,
   };
 
   componentDidMount() {
@@ -28,7 +29,8 @@ class App extends Component {
     axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`)
     .then(response => {
       this.setState({
-        photos: response.data.data
+        photos: response.data.data,
+        loading: false
       });
      })
     .catch(error => {
@@ -50,9 +52,11 @@ class App extends Component {
               <Route path="/computers" />
               <Route component={NotFound} />
             </Switch>
-            <PhotoContainer data={this.state.photos}>
-              {/* Photos will go here*/}
-            </PhotoContainer>
+            {
+              (this.state.loading)
+              ? <p>Loading...</p>
+              : <PhotoContainer data={this.state.photos} />
+            }
           </div>
         </div>
       </BrowserRouter>
