@@ -25,13 +25,15 @@ class App extends Component {
     this.performSearch();
   }
 
-  performSearch = (query = 'cat') => {
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`)
+  performSearch = (query = 'random') => {
+    // axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`)
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       this.setState({
-        photos: response.data.data,
+        photos: response.data.photos.photo,
         loading: false
       });
+      console.log(this.state.photos);
      })
     .catch(error => {
     console.log('Error fetching and parsing data', error);

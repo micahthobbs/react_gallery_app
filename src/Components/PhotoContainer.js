@@ -7,7 +7,7 @@ function PhotoContainer(props) {
     let photos;
     if (results.length > 0) {
         photos = results.map(photo => 
-            <Photo url={photo.images.fixed_height.url} key={photo.id} />
+            <Photo url={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} key={photo.id} />
         );
     } else {
         photos = <NotFound />
