@@ -46,7 +46,7 @@ class App extends Component {
         <div className="App"> 
           <div className="container">
             <SearchBar onSearch={this.performSearch}/>
-            <Nav onClick={this.performSearch}/>
+            <Nav/>
             <Switch>
               <Route exact path="/" />
               <Route path="/cats" />

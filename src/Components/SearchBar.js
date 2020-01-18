@@ -6,22 +6,14 @@ class SearchBar extends Component {
     state = {
       searchText: ''
     }
-
-    // https://dev.to/gaels/an-alternative-to-handle-global-state-in-react-the-url--3753
-
+    
     onSearchChange = e => {
       this.setState({ searchText: e.target.value });
     }
 
     handleSubmit = e => {
       e.preventDefault();
-      
-      this.props.onSearch(this.state.searchText);
-      
-      // Trying to update the url path on search
-      // let history = useHistory();
-      // history.push(`/${this.state.searchText}`)
-      
+      this.props.onSearch(this.state.searchText);      
       e.currentTarget.reset();
     }
 

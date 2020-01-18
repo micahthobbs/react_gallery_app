@@ -20,9 +20,6 @@ import {
 //       </nav>
 //     )
 // }
-
-
-
 class Nav extends Component {
     
     // state = {
