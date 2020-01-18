@@ -6,8 +6,9 @@ import apiKey from './config';
 import SearchBar from './Components/SearchBar';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
-import NotFound from './Components/NotFound';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Route404 from './Components/PhotoContainer'
+// import NotFound from './Components/NotFound';
+import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom'
 
 import './App.css';
 
@@ -25,8 +26,7 @@ class App extends Component {
     this.performSearch();
   }
 
-  performSearch = (query = 'random') => {
-    // axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`)
+  performSearch = (query = "random" ) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       this.setState({
@@ -44,15 +44,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App"> 
-          <div className="Container">
+          <div className="container">
             <SearchBar onSearch={this.performSearch}/>
-            <Nav />
+            <Nav onClick={this.performSearch}/>
             <Switch>
               <Route exact path="/" />
               <Route path="/cats" />
               <Route path="/dogs" />
               <Route path="/computers" />
-              <Route component={NotFound} />
+              <Route component={Route404}  />
             </Switch>
             {
               (this.state.loading)
