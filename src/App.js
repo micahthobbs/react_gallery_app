@@ -7,7 +7,6 @@ import SearchBar from './Components/SearchBar';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
 import Route404 from './Components/PhotoContainer'
-// import NotFound from './Components/NotFound';
 import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom'
 
 import './App.css';
@@ -53,6 +52,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App"> 
           <div className="container">
+            <h1>React Gallery App</h1>
             <SearchBar onSearch={this.performSearch}/>
             <Nav/>
             <Switch>
