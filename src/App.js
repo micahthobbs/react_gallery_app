@@ -52,8 +52,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="App"> 
           <div className="container">
-            <h1>React Gallery App</h1>
-            <SearchBar onSearch={this.performSearch}/>
+            <h1>Photo Gallery Search</h1>
+            <SearchBar onSearch={this.performSearch} searchText={this.state.searchText}/>
             <Nav/>
             <Switch>
               <Route exact path="/" />
@@ -65,7 +65,7 @@ class App extends Component {
                 ? <p>Loading...</p>
                 : <Route path="/:query" render={ () => <PhotoContainer data={this.state.searchPhotos} /> } />
               }
-              <Route component={Route404} data={this.state.searchPhotos}  />
+              <Route component={Route404} />
             </Switch>
           </div>
         </div>
