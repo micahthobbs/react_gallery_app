@@ -18,22 +18,30 @@ const axios = require('axios');
 class App extends Component {
 
   state = {
-    photos: [],
+    searchPhotos: [],
+    catPhotos: [],
+    dogPhotos: [],
+    computerPhotos: [],
     loading: true,
   };
 
   componentDidMount() {
-    this.performSearch();
+    this.performSearch('random', 'searchPhotos');
+    this.performSearch('cats', 'catPhotos');
+    this.performSearch('dogs', 'dogPhotos');
+    this.performSearch('computers', 'computerPhotos');
   }
 
-  performSearch = (query = "random" ) => {
+  performSearch = (query = "random", photoState = "searchPhotos" ) => {
+    this.setState({
+        loading:true
+    });
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       this.setState({
-        photos: response.data.photos.photo,
+        [photoState]: response.data.photos.photo,
         loading: false
       });
-      console.log(this.state.photos);
      })
     .catch(error => {
     console.log('Error fetching and parsing data', error);
@@ -49,16 +57,16 @@ class App extends Component {
             <Nav/>
             <Switch>
               <Route exact path="/" />
-              <Route path="/cats" />
-              <Route path="/dogs" />
-              <Route path="/computers" />
-              <Route component={Route404}  />
+              <Route path="/cats" render={ () => <PhotoContainer data={this.state.catPhotos} />} />
+              <Route path="/dogs" render={ () => <PhotoContainer data={this.state.dogPhotos} />}/>
+              <Route path="/computers" render={ () => <PhotoContainer data={this.state.computerPhotos} />} />
+              {
+                (this.state.loading)
+                ? <p>Loading...</p>
+                : <Route path="/:query" render={ () => <PhotoContainer data={this.state.searchPhotos} /> } />
+              }
+              <Route component={Route404} data={this.state.searchPhotos}  />
             </Switch>
-            {
-              (this.state.loading)
-              ? <p>Loading...</p>
-              : <PhotoContainer data={this.state.photos} />
-            }
           </div>
         </div>
       </BrowserRouter>
