@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { 
-    NavLink,
-    useParams,
+    NavLink
 } from "react-router-dom";
 class Nav extends Component {
 

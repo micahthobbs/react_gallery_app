@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import apiKey from './config';
 
 //Components
@@ -7,11 +7,11 @@ import SearchBar from './Components/SearchBar';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
 import Route404 from './Components/PhotoContainer'
-import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom'
 
+// CSS
 import './App.css';
 
-// Libs
+// Libraries
 const axios = require('axios');
 
 class App extends Component {
@@ -31,6 +31,7 @@ class App extends Component {
     this.performSearch('computers', 'computerPhotos');
   }
 
+  // Query Flicker API
   performSearch = (query = "random", photoState = "searchPhotos" ) => {
     this.setState({
         loading:true
@@ -63,7 +64,7 @@ class App extends Component {
               {
                 (this.state.loading)
                 ? <p>Loading...</p>
-                : <Route path="/:query" render={ () => <PhotoContainer data={this.state.searchPhotos} /> } />
+                : <Route path="/search/:query" render={ () => <PhotoContainer data={this.state.searchPhotos} /> } />
               }
               <Route component={Route404} />
             </Switch>
