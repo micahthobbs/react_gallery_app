@@ -6,7 +6,7 @@ import apiKey from './config';
 import SearchBar from './Components/SearchBar';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
-import Route404 from './Components/PhotoContainer'
+import Route404 from './Components/Route404';
 
 // CSS
 import './App.css';
